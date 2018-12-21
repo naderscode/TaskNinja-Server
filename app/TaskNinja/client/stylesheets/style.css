@@ -1,0 +1,155 @@
+body {
+  background: #f9e933;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 100%;
+}
+
+header, main, footer {
+  min-width: 855px;
+  
+}
+
+
+header .container, main .container, footer .container {
+  max-width: 855px;
+  margin: auto;
+}
+
+
+header {
+  padding: 25px 0;
+  background: white;
+  overflow: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+header nav {
+	float: right;
+	width: 285px;
+}
+
+a {
+	color: #f00;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* MAIN LOGO */
+h1 {
+  float: left;
+  width: 570px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 3em;
+  color:#b33;
+  font-style: italic;
+}
+
+/* FOOTER HEADINGS */
+h5 {
+	font-family: "Ubuntu", sans-serif;
+	font-size: 1.25em;
+  margin-bottom: 10px;
+}
+
+
+main {
+  background: #fff;
+  border-radius: 0 5px 5px 5px;
+  padding: 40px;
+  overflow: auto;
+}
+
+.tabs a span {
+  width: 100px;
+  display: inline-block;
+  background:  #ddd;
+  padding: 5px;
+  margin-right: 10px;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+}
+
+.tabs a .active {
+  background: #eee;
+}
+
+main .content {
+  padding: 30px 10px 30px 10px;
+  background: #eee;
+  border-radius: 0 5px 5px 5px;
+}
+
+main .content h3 {
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    color: #999;;
+    background: #ddd;
+    padding: 5px;
+    margin: 20px 0 10px 0;
+}
+
+main .content li {
+  background: #eff;
+  padding: 3px;
+  margin: 0 0 10px 0;
+  border-radius: 5px;
+}
+
+main .content p {
+  background: yellow;
+}
+
+main .content input {
+  font-size: 1.3em;
+}
+
+main .content button {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0 3px 0 3px;
+  margin-left: 5px;
+  background: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+footer {
+	border-top: 1px solid #ddd;
+	padding: 40px 0 20px 0;
+}
+
+footer .contact {
+  float: left;
+  width: 570px;
+}
+
+
+footer .contact p:nth-child(2) {
+  color: #b33;
+  font-style: italic;
+}
+
+footer .sitemap {
+  float: right;
+  width: 285px;
+}
+
+footer ul {
+	width: 230px;
+}
+
+li {
+	list-style: none;
+}
+
+footer .sitemap .left {
+	float: left;
+}
+
+footer .sitemap .right {
+	float: right;
+}
+
+
+
