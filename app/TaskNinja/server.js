@@ -30,23 +30,29 @@ var express = require("express"),
 
 app.use(express.static(__dirname + "/client"));
 
+// tell Express to parse incoming
+// JSON objects
+app.use(express.urlencoded());
+
 http.createServer(app).listen(3000);
 
 app.get("/todos.json", function(req, res){
 	res.json(toDos);
 });
 
-app.use(express.urlencoded());
-
 
 app.post("/todos", function(req, res){
 
 	//the object is now stored in req.body
 	var newToDo = req.body;
+
 	console.log(newToDo);
+
 	toDos.push(newToDo);
 
-	console.log("data has been posted to the server");
+	
 	//send back a simple object
 	res.json({"message": "You posted to the server"});
 });
+
+
