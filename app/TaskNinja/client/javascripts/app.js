@@ -93,9 +93,21 @@ var main = function (toDoObjects) {
 
                 $button.on("click", function () {
                     var description = $input.val(),
-                        tags = $tagInput.val().split(",");
+                        tags = $tagInput.val().split(","),
+                        // create the new to-do item
+                        newToDo = {"description":description, "tags":tags};
                                  
                     toDoObjects.push({"description":description, "tags":tags});
+
+                    //post to todos route 
+                    $.post("todos", newToDo, function(result){
+                        //this callback responds when the server responds
+                        console.log("the server responded");
+                        console.log(result);
+                        //wait to push new object to clienr until after server returns
+                        toDoObjects.push(newToDo);
+
+                    } );
 
                     // update toDos
                     toDos = toDoObjects.map(function (toDo) {
