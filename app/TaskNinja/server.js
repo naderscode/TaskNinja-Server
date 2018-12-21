@@ -1,7 +1,8 @@
+
 var express = require("express"),
-	http = require("http"),
-	app = express(),
-	toDos = [
+    http = require("http"),
+    app = express(),
+    toDos = [
 	{
 		"description": "Car wash",
 		"tags": ["auto"]
@@ -27,7 +28,7 @@ var express = require("express"),
 		"tags": ["work", "design"]
 	}
 ]
-
+        
 app.use(express.static(__dirname + "/client"));
 
 // tell Express to parse incoming
@@ -36,23 +37,18 @@ app.use(express.urlencoded());
 
 http.createServer(app).listen(3000);
 
-app.get("/todos.json", function(req, res){
-	res.json(toDos);
+app.get("/todos.json", function (req, res) {
+    res.json(toDos);
 });
 
+app.post("/todos", function (req, res) {
+    // the object is now stored in req.body
+    var newToDo = req.body;
 
-app.post("/todos", function(req, res){
+    console.log(newToDo);
 
-	//the object is now stored in req.body
-	var newToDo = req.body;
+    toDos.push(newToDo);
 
-	console.log(newToDo);
-
-	toDos.push(newToDo);
-
-	
-	//send back a simple object
-	res.json({"message": "You posted to the server"});
+    // send back a simple object
+    res.json({"message":"You posted to the server!"});
 });
-
-

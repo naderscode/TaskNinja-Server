@@ -2,7 +2,7 @@ var main = function (toDoObjects) {
     "use strict";
 
     var toDos = toDoObjects.map(function (toDo) {
-          // return the description
+          // we'll just return the description
           // of this toDoObject
           return toDo.description;
     });
@@ -14,8 +14,8 @@ var main = function (toDoObjects) {
         $element.on("click", function () {
             var $content,
                 $input,
-                $button;
-                
+                $button,
+                i;
 
             $(".tabs a span").removeClass("active");
             $element.addClass("active");
@@ -23,7 +23,7 @@ var main = function (toDoObjects) {
 
             if ($element.parent().is(":nth-child(1)")) {
                 $content = $("<ul>");
-                for (var i = toDos.length-1; i >= 0; i--) {
+                for (i = toDos.length-1; i >= 0; i--) {
                     $content.append($("<li>").text(toDos[i]));
                 }
             } else if ($element.parent().is(":nth-child(2)")) {
@@ -35,14 +35,11 @@ var main = function (toDoObjects) {
             } else if ($element.parent().is(":nth-child(3)")) {
                 //create an empty tags array
                 var tags = [];
-
                 //iterate over all todos
                 toDoObjects.forEach(function (toDo) {
-                    
                     //iterate over each tag in this todo
                     toDo.tags.forEach(function (tag) {
-                        
-                    	//make sure tag does not exist in the tag array
+                        //make sure tag does not exist in the tag array
                         if (tags.indexOf(tag) === -1) {
                             tags.push(tag);
                         }
@@ -51,10 +48,8 @@ var main = function (toDoObjects) {
                 console.log(tags);
 
                 var tagObjects = tags.map(function (tag) {
-                    
-                	//create an array for todos that have tags
+                    //create an array for todos that have tags
                     var toDosWithTag = [];
-
                     //find all todos that have that tag
                     toDoObjects.forEach(function (toDo) {
                         //make sure the result of indexOf is NOT equal to -1
@@ -62,13 +57,10 @@ var main = function (toDoObjects) {
                             toDosWithTag.push(toDo.description);
                         }
                     });
-
                     //map each tag to an object that contain the name of the tag
                     //and an array of todo descriptions
                     return { "name": tag, "toDos": toDosWithTag };
                 });
-
-                console.log(tagObjects);
 
                 tagObjects.forEach(function (tag) {
                     var $tagName = $("<h3>").text(tag.name),
@@ -88,7 +80,7 @@ var main = function (toDoObjects) {
                 var $input = $("<input>").addClass("description"),
                     $inputLabel = $("<p>").text("Description: "),
                     $tagInput = $("<input>").addClass("tags"),
-                    $tagLabel = $("<p>").text("Tags (seperate by commas): "),
+                    $tagLabel = $("<p>").text("Tags: "),
                     $button = $("<button>").text("+");
 
                 $button.on("click", function () {
@@ -99,16 +91,12 @@ var main = function (toDoObjects) {
                                  
                     toDoObjects.push({"description":description, "tags":tags});
 
-                    //post to todos route 
-                    $.post("todos", newToDo, function(result){
-                        //this callback responds when the server responds
-                        console.log("the server responded");
-                        console.log(result);
-                        //wait to push new object to clienr until after server returns
-                        toDoObjects.push(newToDo);
-
-                    } );
-
+                    // here we'll do a quick post to our todos route
+                    $.post("todos", newToDo, function (response) {
+                        console.log("We posted and the server responded!");
+                        console.log(response);
+                    });
+                    
                     // update toDos
                     toDos = toDoObjects.map(function (toDo) {
                         return toDo.description;
@@ -139,3 +127,4 @@ $(document).ready(function () {
         main(toDoObjects);
     });
 });
+
