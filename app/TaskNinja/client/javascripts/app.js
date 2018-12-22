@@ -1,6 +1,6 @@
 var main = function (toDoObjects) {
     "use strict";
-
+    
     var toDos = toDoObjects.map(function (toDo) {
           // we'll just return the description
           // of this toDoObject
@@ -33,13 +33,10 @@ var main = function (toDoObjects) {
                 });
 
             } else if ($element.parent().is(":nth-child(3)")) {
-                //create an empty tags array
                 var tags = [];
-                //iterate over all todos
+
                 toDoObjects.forEach(function (toDo) {
-                    //iterate over each tag in this todo
                     toDo.tags.forEach(function (tag) {
-                        //make sure tag does not exist in the tag array
                         if (tags.indexOf(tag) === -1) {
                             tags.push(tag);
                         }
@@ -48,19 +45,18 @@ var main = function (toDoObjects) {
                 console.log(tags);
 
                 var tagObjects = tags.map(function (tag) {
-                    //create an array for todos that have tags
                     var toDosWithTag = [];
-                    //find all todos that have that tag
+
                     toDoObjects.forEach(function (toDo) {
-                        //make sure the result of indexOf is NOT equal to -1
                         if (toDo.tags.indexOf(tag) !== -1) {
                             toDosWithTag.push(toDo.description);
                         }
                     });
-                    //map each tag to an object that contain the name of the tag
-                    //and an array of todo descriptions
+
                     return { "name": tag, "toDos": toDosWithTag };
                 });
+
+                console.log(tagObjects);
 
                 tagObjects.forEach(function (tag) {
                     var $tagName = $("<h3>").text(tag.name),
@@ -81,29 +77,27 @@ var main = function (toDoObjects) {
                     $inputLabel = $("<p>").text("Description: "),
                     $tagInput = $("<input>").addClass("tags"),
                     $tagLabel = $("<p>").text("Tags: "),
-                    $button = $("<button>").text("+");
+                    $button = $("<span>").text("+");
 
                 $button.on("click", function () {
                     var description = $input.val(),
                         tags = $tagInput.val().split(","),
-                        // create the new to-do item
                         newToDo = {"description":description, "tags":tags};
-                                 
-                    toDoObjects.push({"description":description, "tags":tags});
 
-                    // here we'll do a quick post to our todos route
-                    $.post("todos", newToDo, function (response) {
-                        console.log("We posted and the server responded!");
-                        console.log(response);
-                    });
-                    
-                    // update toDos
-                    toDos = toDoObjects.map(function (toDo) {
-                        return toDo.description;
-                    });
+                    $.post("todos", newToDo, function (result) {
+                        console.log(result);
 
-                    $input.val("");
-                    $tagInput.val("");
+                        //toDoObjects.push(newToDo);
+                        toDoObjects = result;
+
+                        // update toDos
+                        toDos = toDoObjects.map(function (toDo) {
+                            return toDo.description;
+                        });
+
+                        $input.val("");
+                        $tagInput.val("");
+                    });
                 });
 
                 $content = $("<div>").append($inputLabel)
@@ -127,4 +121,3 @@ $(document).ready(function () {
         main(toDoObjects);
     });
 });
-

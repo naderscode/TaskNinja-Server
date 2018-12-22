@@ -3,6 +3,6 @@
 	"decription": "a personal tasks app demonstrating some web technologies",
 	"version": 1,
 	"dependencies": {
-		"mongoose": "3.6.x"
+		"mongoose": "^5.4.0"
 	}
 }
