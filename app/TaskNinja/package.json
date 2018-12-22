@@ -1,0 +1,8 @@
+{
+	"name": "taskninja",
+	"decription": "a personal tasks app demonstrating some web technologies",
+	"version": 1,
+	"dependencies": {
+		"mongoose": "3.6.x"
+	}
+}
